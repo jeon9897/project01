@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>하림펫푸드 - 로그인 페이지</title>
+  <style>
+    .login_wrap{
+      border:none;
+      width:350px;
+      margin:150px auto 100px auto;
+    }
+    fieldset legend{
+      font-weight:800;
+      text-align:center;
+    }
+    fieldset input{
+      width:100%;height:46px;
+      border:none;
+    }
+    fieldset a{
+      text-decoration:none;color:#333;
+    }
+    label[for=id_txt],label[for=pw_txt]{display:none;}
+    input[type=text], input[type=password]{
+      background:#e2e2e2;
+      margin:10px 0px;
+    }
+    #login_btn{
+      background:#f00;color:#fff;
+      font-weight:bold;
+      margin-bottom:16px;
+    }
+    #id_save{
+      width:10px;height:10px;margin-left:150px;
+      accent-color: #f00;
+    }
+    .naver_join, .kakao_join{
+      font-weight:bold;color:#484848;
+    }
+    .naver_join{
+      background-color:rgb(10, 248, 10);
+      margin-top:30px;margin-bottom:10px;
+    }
+    .kakao_join{background-color:rgb(250, 250, 8);}
+  </style>
+</head>
+<body>
+  <?
+    include('header.php');
+  ?>
+
+  <section class="login_wrap">
+    <fieldset>
+      <legend>로그인</legend>
+      <p>
+        <label for="id_txt">ID : </label>
+        <input type="text" id="id_txt" placeholder="아이디">
+      </p>
+      <p>
+        <label for="pw_txt">PW : </label>
+        <input type="password" id="pw_txt" placeholder="패스워드">
+      </p>
+      <p><input type="button" value="LOGIN" id="login_btn"></p>
+      <p>
+        <a href="join.html" title="회원가입">회원가입</a> &#124;
+        <a href="password_search.html" title="비번찾기">비번찾기</a>
+        <input type="checkbox" id="id_save"><label for="id_save">아이디 저장</label>
+      </p>
+      
+      <p><input type="button" value="네이버 아이디로 회원가입" class="naver_join"></p>
+      <p><input type="button" value="카카오 아이디로 회원가입" class="kakao_join"></p>
+    </fieldset>
+  </section>
+    
+  <?
+    include('footer.php');
+  ?>
+
+  <script>
+    //1. 변수선언
+    let id, pw;
+    const login_btn = document.getElementById('login_btn');
+
+    //2. 로그인 버튼 클릭시 해당 id, pw값 변수에 담아서 조건식 만들기
+    login_btn.addEventListener('click',function(){
+      id_pw_check(); //함수호출
+    });
+
+    //아이디, 패스워드 체크하는 함수
+    function id_pw_check(){
+      //alert('함수호출하기');
+      id = document.getElementById('id_txt').value;
+      pw = document.getElementById('pw_txt').value;
+
+      console.log(id); //출력확인
+      console.log(pw); //출력확인
+
+      //3. 제어문을 활용하여 검증 결과 출력하기
+      if(id=='master'){
+        if(pw=='1234'){
+          alert('로그인 인증 확인');
+        }else{
+          alert('패스워드가 틀립니다. 다시 확인하세요.');
+          location.reload(); //f5 누른것과 같이 새로고침이 되어서 사용자가 입력한 내용이 비워짐.
+          document.getElementById('id_txt').value = "";
+          document.getElementById('pw_txt').value = "";
+        }
+      }else{
+        alert('아이디가 틀립니다. 다시 확인하세요.');
+        location.reload(); //f5 누른것과 같이 새로고침이 되어서 사용자가 입력한 내용이 비워짐.
+        document.getElementById('id_txt').value = "";
+        document.getElementById('pw_txt').value = "";
+      }
+      //끝~
+    }
+  </script>
+</body>
+</html>
